@@ -1,0 +1,267 @@
+@import url(https://fonts.googleapis.com/css?family=Muli);
+@import "form.css";
+
+
+/************* Common Dasboard Layput ***************/
+body {
+  display:flex;
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+  background-color:#b1b1b1b8;
+  font-family:Muli, sans-serif;
+}
+ul {
+  list-style:none;
+  margin-top:0;
+  padding:0;
+}
+a {
+  cursor:pointer;
+  display:block;
+  color:white;
+  text-decoration:none;
+}
+.bckg {
+  background-color:#383B42;
+  box-shadow:-4px 0px 10px rgba(14, 14, 14, 0.48) inset;
+  width:18%;
+  height:100%;
+  position:fixed;
+  left:0;
+  top:0;
+}
+/* Dashboard Heading */
+h1 {
+    text-align: center;
+    font-weight: normal;
+    color: #F6F6EF;
+    line-height:8vh;
+    margin:0;
+    font-size:24px;
+    letter-spacing:2px;
+    background-color:#34363A;
+    border-bottom:1px solid rgba(101, 116, 134, 0.57);
+}
+header {
+  width:18%;
+  height:100%;
+  float:left;
+  position:relative;
+  z-index:99;
+}
+  
+header nav ul li {
+    border-bottom:1px solid #42454D;
+    padding-left:20px;
+    transition:all 0.6s;
+    border-top:1px solid #2E3036;
+}
+      
+nav ul li:hover {
+  background-color: #454952;
+  transition: all 0.6s;
+  border-bottom: 1px solid #797979;
+}
+      
+nav ul li:hover a {
+  color:#fff;
+  transition:all 0.6s;
+}
+      
+nav ul li a {
+  line-height:55px;
+  font-size:18px;
+  position:relative;
+  letter-spacing:1px;
+  transition:all 0.6s;
+
+}
+      
+nav ul li a:before {
+  font-family: 'entypo', sans-serif;
+  font-size:20px;
+  position:absolute;
+  left:-32px;
+}
+
+nav ul li a i {
+  margin-right: 15px;
+}
+
+
+h2 {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+  color: #000000b5;
+  font-weight: normal;
+  padding-left: 50px;
+  line-height: 60px;
+  text-shadow: 1px 1px 2px #fff;
+  position: relative;
+  flex:1;
+  -webkit-flex:1;
+  -ms-flex:1;
+}
+h2:before {
+  content: '';
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  left: -21px;
+  top: 9px;
+  background-color: #34363A;
+  transform:rotate(45deg);
+}
+
+h3 {
+  font-size:17px;
+  margin:0;
+  line-height: 40px;
+  color: #555;
+  cursor:pointer;
+  position:relative;
+} 
+
+
+main {
+  flex:1;
+  -webkit-flex:1;
+  -ms-flex:1;
+}
+.title {
+  background-color: #f9f9f9f5;
+  border-bottom: 1px solid #C0C1C0;
+  height:60px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display:flex;
+}
+  
+.title span {
+    color: #626262;
+    width: auto;
+    margin: 0 20px;
+    float: right;
+    line-height: 62px;
+    position:relative;
+    text-decoration:none;
+    transition:all .5s;
+}
+a:hover {
+  color:#33526B;
+  transition:all .5s;
+}
+
+
+/****************** Profile ************************/
+div.profile-container {
+  display: flex;
+  justify-content: space-between;
+}
+div.profile {
+  padding: 70px 130px;
+}
+div.profile .username, div.profile .email {
+  background: #383b42ad;
+  padding: 22px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 2%;
+  color: white;
+  font-size: 18px;
+  opacity: 0.9;
+  margin: 22px 0px;
+}
+.username span, .email span {
+  text-transform: uppercase;
+  color: #fff0d3;
+  font-family:cursive;
+}
+div.profile-img img {
+  width: 200px;
+  margin: 80px;
+}
+.profile-container + .mssg {
+  margin: 10px 25px;
+  color: black;
+  font-size: 1.1rem;
+}
+
+
+/************************** Register a new case *************************/
+.missing-form-container {
+  margin: 45px;
+  padding: 20px;
+  background-color: #d5d5d5;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  opacity: 0.9;
+  width: 70%;
+  position: relative;
+}
+div.input-field {
+  width: 250px;
+}
+
+/* form.css */
+.input-field input {
+  border-bottom: solid 1px black;
+}
+.input-field input:not(:placeholder-shown) + label, .input-field input:focus + label {
+  transform: translate(0, -1.125rem) scale(0.8);
+  opacity: 0.8;
+  color:#0000f3;
+}
+.input-field input:not(:placeholder-shown), .input-field input:focus {
+  border-bottom: solid 1px #0000f3;
+}
+
+
+
+/* button to upload image */
+/* form.css */
+
+div.missing-form-container .error-mssg {
+  color: #ff1919;
+  margin: 20px 0
+}
+
+
+/****************** Missing cases and Found cases ************************/
+div.missing-cases-cont {
+    border: solid 1.5px black;
+    margin: 50px;
+    padding: 15px;
+}
+div.found-cases-cont {
+    border: solid 1.5px black;
+    margin: 25px;
+    padding: 10px;
+}
+
+table {
+  width: 100%;
+  border-spacing: 12px;
+}
+tr {
+  text-align: center;
+}
+th {
+  font-size: 1.2rem;
+    color: #ff6596;
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 3px;
+    border-bottom: 1px solid gray;
+}
+td {
+  border-bottom: 1px solid gray;
+  padding: 15px;
+}
+tr:last-child td {
+  border-bottom: none;
+}

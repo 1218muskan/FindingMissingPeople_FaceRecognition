@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finding Missing People</title>
+    <link rel="icon" href="../static/assets/Images/icon.png" type="image/icon type">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="{{ url_for('home')}}"><img src="../static/assets/Images/logo.png" height="78px" width="78px"></a>
+                <span>Find Missing</span>
+            </div>
+            <div id="admin">
+                <a href="{{ url_for('adminLogin') }}">ADMIN</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="greeting-user">
+            <h2>Welcome User</h2>
+            <p>Help us in finding missing people and uniting them with their families...</p>
+            <p style="color: #f9a1cd; margin-top: 3px;">(Fill in the form below if you find any suspect, your identity won't be shared with anyone else)</p>
+
+            
+        </div>
+
+        <div class="suspect-form-container">
+            <form action="", method="post" class="suspect-form" enctype="multipart/form-data">
+
+                <div class="suspect-form-data">
+                    <div class="input-field">
+                        <input type="text" name="name" placeholder=" ">
+                        <label for="name">Suspect's Name</label>
+                    </div>
+    
+                    <div class="input-field">
+                        <input type="text" id="location" name="loc" placeholder=" " required>
+                        <label for="location">Found at location</label>
+    
+                    </div>
+            
+                    <div class="input-field">
+                        <input type="text" id="hName" name="hName" placeholder=" " required>
+                        <label for="hName">Helper's Name</label>
+    
+                    </div>
+    
+                    <div class="input-field">
+                        <input type="tel" id="hPone" name="hPhone" placeholder=" " required pattern="^\d{10}$"
+                               oninvalid="this.setCustomValidity('Contact number should contain 10 digits')" oninput="this.setCustomValidity('')">
+                        <label for="hPhone">Helper's Contact</label>
+                    </div>
+            
+                    <div class="input-field">
+                        <input type="date" id="date" name="fDate" placeholder=" " style="border-bottom-color: white;">
+                        <label for="date" style="color: white;">Date</label>
+                    </div>
+
+                    <div class="suspect-image">
+                        <label for="susImg">Image of suspect</label>
+                    <input name="susImg" id="susImg" type="file" accept="image/*" required><br><br>
+                    </div>
+                    
+
+                </div>
+
+            
+                  <button class="match-suspect-img" name="Submit_B" type="submit" value="matchImg">Match</button>
+            </form>
+
+            <div class="error-mssg">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                      {% for message in messages %}
+                           <p>{{ message }}</p>
+                      {% endfor %}
+                {% endif %}
+             {% endwith %}
+            </div>
+
+        </div>
+
+
+        <div class="result-container" id="match-result">
+            <!-- <h2>RESULT</h2>
+
+            <div class="result">
+                <p>Matching suspect's image with images of missing people in our database. Kindly Wait!</p>
+                <img src="../static/assets/Images/search.gif">
+
+                {{ match_msg }}
+            </div> -->
+            
+
+
+            <!-- <h2>RESULT</h2>
+                <div class="result-msg">
+                    {{ match_msg }}
+                </div>
+
+                <div class="matched-images-container">
+
+                    <div class="matched-image">
+                        <img src="../static/case_images/Suspects/" + {{ image_of_suspect }}>
+                        <p>Suspect's Image</p>
+                    </div>
+
+                    <div class="matched-image">
+                        <img src="{{ url_for('static', filename='assets/case images/Found people/{{ matched_image }} ') }}">
+                        <p>Matched Image</p>
+                    </div>
+
+                </div> -->
+        </div>
+        
+    </div>
+
+
+
+    <!-- *********** JavaScript ********** -->
+    <script type="text/javascript">
+
+        formFields = document.getElementsByTagName('input');
+        submitButton = document.querySelector('.match-suspect-img');
+        resultCont = document.querySelector('.result-container');
+
+        // list of all input fields which are required
+        list = []
+        for (let i = 0; i < formFields.length; i++) {
+
+            if(formFields[i].required){
+
+                list.push(formFields[i]);
+            }
+        }
+
+        submitButton.addEventListener('click', function(){
+
+            var flag=0;
+            list.forEach(ele => {
+                if(!ele.value){
+                    flag=1;
+                }
+            });
+
+            if(!flag){
+
+                resultCont.style.display = 'block';
+                var content = `<h2>RESULT</h2>
+                               <div class="result">
+                                    <p>Matching suspect's image with images of missing people in our database. Kindly Wait!</p>
+                                    <img src="../static/assets/Images/search.gif">
+                                </div>`;
+
+                resultCont.innerHTML = content;
+            }
+
+            window.scrollTo(0, document.body.scrollHeight);
+            
+        });
+
+
+        {% if match_msg %}
+
+           {% if match == false %}
+
+           var content = `<h2>RESULT</h2>
+                        <div class="result-msg">
+                            {{ match_msg }}
+                        </div>`;
+
+            {% else %}
+
+            src1 = '../static/case_images/suspects/' + '{{ image_of_suspect }}';
+            src2 = '../static/case_images/found_people/' + '{{ matched_image }}';
+
+            var content = `<h2>RESULT</h2>
+                           <div class="result-msg">
+                                {{ match_msg }}
+                            </div>
+
+                            <div class="matched-images-container">
+
+                                <div class="matched-image">
+                                    <img src= ${src1}>
+                                    <p>Suspect's Image</p>
+                                </div>
+
+                                <div class="matched-image">
+                                    <img src= ${src2}>
+                                    <p>Matched Image</p>
+                                </div>
+
+                            </div>`;
+
+            {% endif %}
+
+            resultCont.style.display = 'block';
+            resultCont.innerHTML = content;
+
+            document.location.hash = '#{{ scroll }}';
+
+        {% endif %}
+
+    </script>
+</body>
+</html>

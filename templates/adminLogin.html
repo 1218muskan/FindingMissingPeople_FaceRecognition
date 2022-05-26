@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+
+  <style>
+    .logo-container {
+      width: 18rem;
+    }
+    .logo-container span {
+      font-size: 1.8rem;
+      padding: 8px 2px;
+    }
+  </style>
+
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+        <div class="logo-container" >
+            <a href="{{ url_for('home')}}"><img src="../static/assets/Images/logo.png" height="62px" width="62px"></a>
+            <span>Find Missing</span>
+        </div>
+    </nav>
+  </header>
+
+  <main class="admin-login">
+    <h3>Admin Login</h3>
+
+    <div class="login-form-cont">
+
+      <form action="" method="post" class="login-form">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required>
+        
+        <label for="pswd"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="pswd" required>
+                
+        <button type="submit" name="loginBtn" value="login">Login</button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <div class="admin-error-mssg">
+    {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+                    <p>{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+      {% endwith %}
+  </div>
+  
+
+</body>
+</html>

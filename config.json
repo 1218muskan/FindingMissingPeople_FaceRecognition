@@ -1,0 +1,11 @@
+{
+  "params":
+  {
+    "admin_uname": "admin1",
+    "admin_pswd": "admin@xyz",
+    "admin_mail": "1218.muskangupta@gmail.com",
+    "missing_images": "static/case_images/missing_people/",
+    "suspect_images": "static/case_images/suspects/",
+    "found_images": "static/case_images/found_people/"
+  }
+}

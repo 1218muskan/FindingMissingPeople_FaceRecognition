@@ -1,0 +1,70 @@
+{% extends "dashboardLayout.html" %} 
+ {% block body %}
+
+<main>
+  <div class="title">
+    <h2>Missing Cases</h2>
+    <span>
+      <i class="fa fa-user-secret" aria-hidden="true"></i>
+      Hello Admin!
+    </span>
+  </div>
+
+
+  <div class="missing-cases-cont">
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Guardian Name</th>
+        <th>Guardian Contact</th>
+        <th>City</th>
+        <th>Image</th>
+        <th>Date of Missing</th>
+      </tr>
+
+      {% for m in missing %}
+      <tr>
+       <td>{{ m.name }}</td>
+       <td>{{ m.gender }}</td>
+       <td>{{ m.age }}</td>
+       <td>{{ m.guardian_name }}</td>
+       <td>{{ m.guardian_contact }}</td>
+       <td>{{ m.city }}</td>
+
+       <td class="image">
+         <!-- <img src= '../static/assets/case_images/missing_people'> -->
+       </td>
+
+       <td>{{ m.missing_date }}</td>
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+  </div>
+  
+</main>
+
+
+<!-- ***************** JavaScript ************* -->
+<script>
+  
+  img  = document.querySelectorAll('.image');
+
+  var index=0
+  {% for m in missing %}
+   
+   path = '../static/case_images/missing_people/' + '{{ m.complaintID }}' + '_' + '{{ m.image_name }}';
+   img[index].innerHTML = `<img src= ${path} width=75px>`;
+   
+   index += 1;
+
+   {% endfor %}
+
+</script>
+
+{% endblock %}

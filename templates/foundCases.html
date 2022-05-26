@@ -1,0 +1,71 @@
+{% extends "dashboardLayout.html" %} 
+{% block body %}
+
+<main>
+  <div class="title">
+    <h2>Found Cases</h2>
+    <span>
+      <i class="fa fa-user-secret" aria-hidden="true"></i>
+      Hello Admin!
+    </span>
+  </div>
+
+
+  <div class="found-cases-cont">
+
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Guardian Name</th>
+        <th>Guardian Contact</th>
+        <th>Address</th>
+        <th>Found location</th>
+        <th>Image</th>
+        <th>Date of Missing</th>
+        <th>Found Date</th>
+      </tr>
+
+      {% for f in found %}
+      <tr>
+       <td>{{ f.name }}</td>
+       <td>{{ f.gender }}</td>
+       <td>{{ f.guardian_name }}</td>
+       <td>{{ f.guardian_contact }}</td>
+       <td>{{ f.address }}</td>
+       <td>{{ f.found_location }}</td>
+
+       <td class="image">
+        <!-- <img src= '../static/assets/case_images/found_people'> -->
+      </td>
+
+       <td>{{ f.missing_date }}</td>
+       <td>{{ f.found_date }}</td>
+      </tr>
+
+      {% endfor %}
+
+    </table>
+
+  </div>
+  
+</main>
+
+<!-- ***************** JavaScript ************* -->
+<script>
+  
+  img  = document.querySelectorAll('.image');
+
+  var index=0
+  {% for f in found %}
+   
+   path = '../static/case_images/found_people/' + '{{ f.complaintID }}' + '_' + '{{ f.actual_image }}';
+   img[index].innerHTML = `<img src= ${path} width=75px>`;
+   
+   index += 1;
+
+   {% endfor %}
+
+</script>
+
+{% endblock %}

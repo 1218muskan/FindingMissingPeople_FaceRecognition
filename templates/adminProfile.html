@@ -1,0 +1,48 @@
+{% extends "dashboardLayout.html" %} 
+ {% block body %}
+
+<main>
+  <div class="title">
+    <h2>Profile</h2>
+    <span>
+      <i class="fa fa-user-secret" aria-hidden="true"></i>
+      Hello Admin!
+    </span>
+  </div>
+
+  <div class="profile-container">
+
+    <div class="profile">
+
+      <div class="username">
+        <span><b>Username :</b> </span>
+        {{ uname }}
+      </div>
+      <div class="email">
+        <span><b>Mail ID :</b> </span>
+        {{ email }}
+      </div>
+      
+    </div>
+
+    <div class="profile-img">
+      <img src="../../static/assets/Images/police_avatar.png">
+    </div>
+
+  </div>
+
+  <div class="mssg">
+    {% with messages = get_flashed_messages() %}
+         {% if messages %}
+               {% for message in messages %}
+                    <p>{{ message }}</p>
+               {% endfor %}
+         {% endif %}
+      {% endwith %}
+  </div>
+
+  
+
+</main>
+
+{% endblock %}

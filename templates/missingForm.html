@@ -1,0 +1,94 @@
+ {% extends "dashboardLayout.html" %}
+ {% block body %}
+
+<main>
+  <div class="title">
+    <h2>Register Missing Case</h2>
+    <span>
+      <i class="fa fa-user-secret" aria-hidden="true"></i>
+      Hello Admin!
+    </span>
+  </div>
+
+
+  <div class="missing-form-container">
+
+    <form action="" class="missing-form" method="post" enctype="multipart/form-data">
+
+    <div class="missing-form-data">
+      
+        <div class="input-field">
+          <input type="text" id="cID" name="cID" pattern=".{8,10}" required placeholder=" "
+                oninvalid="this.setCustomValidity('Complaint ID should be of 8-10 characters')" oninput="this.setCustomValidity('')">
+               <label for="cID">Complaint ID</label>
+        </div>
+        
+        <div class="input-field">
+          <input type="text" name="name" id="name" placeholder=" " required>
+          <label for="name">Name of Missing Person</label>
+        </div>
+  
+        <div class="input-field">
+        <input type="text" maxlength="1" id="gender" name="gender" pattern="[FM]" placeholder=" " required
+               oninvalid="this.setCustomValidity('Enter either F for female or M for male ')" oninput="this.setCustomValidity('')">
+               <label for="gender">Gender</label>
+              </div>
+  
+              <div class="input-field">
+        <input type="number"id="age" name="age" placeholder=" " required>
+        <label for="age">Age</label>
+      </div>
+  
+      <div class="input-field">
+        <input type="text" id="gName" name="gName" placeholder=" " required>
+        <label for="gName">Guardian's Name</label>
+      </div>
+  
+      <div class="input-field">
+        <input type="tel" id="gPhone" name="gPhone" placeholder=" " required pattern="^\d{10}$"
+               oninvalid="this.setCustomValidity('Contact number should contain 10 digits')" oninput="this.setCustomValidity('')">
+               <label for="gPhone">Guardian's Contact</label>
+              </div>
+  
+              <div class="input-field">
+        <input type="text" id="city" name="city" placeholder=" " required>
+        <label for="city">City</label>
+      </div>
+  
+      <div class="input-field">
+        <input type="text" id="pincode" name="pincode" placeholder=" " required pattern="^\d{6}$"
+               oninvalid="this.setCustomValidity('Pincode consists of 6 digits only')" oninput="this.setCustomValidity('')">
+               <label for="pincode">Pincode</label>
+              </div>
+  
+              <div class="input-field">
+        <input type="date" id="mDate" name="mDate" style="border-bottom-color: black;">
+        <label for="mDate" style="color: black;">Date since Missing</label>
+      </div>
+    </div>
+
+    <br>
+    <!-- <div class="input-field"> -->
+      <label for="lostImg">Image of Missing Person</label>
+      <input id="lostImg" name="mImg" type="file" accept="image/*" required>
+    <!-- </div> -->
+    
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <div class="error-mssg">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+          {% for message in messages %}
+               <p>{{ message }}</p>
+          {% endfor %}
+    {% endif %}
+ {% endwith %}
+  </div>
+  
+  </div>
+  
+</main>
+
+ {% endblock %}

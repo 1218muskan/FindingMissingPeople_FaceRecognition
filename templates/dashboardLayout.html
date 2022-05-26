@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../static/css/dashboard.css">
+</head>
+<body>
+
+<span class="bckg"></span>
+<header>
+  <h1>Dashboard</h1>
+  <nav>
+    <ul>
+      <li>
+        <a href="{{ url_for('adminProfile') }}">
+          <i class="fa fa-lg fa-user"></i>
+          Profile
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('registerMissing') }}">
+          <i class="fa fa-clipboard"></i>
+          Register a new case
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('missingCases') }}">
+          <i class="fa fa-file-o"></i>
+          Missing Cases
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('foundCases') }}">
+          <i class="fa fa-check-square-o" aria-hidden="true"></i>
+          Found cases
+        </a>
+      </li>
+      <li>
+        <a href="{{ url_for('logout') }}">
+          <i class="fa fa-power-off"></i>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+{% block body %}
+
+{% endblock %}
+
+</body>
+</html>

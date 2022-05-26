@@ -1,0 +1,69 @@
+/***** suspect form OR missing form *****/
+
+  .missing-form-data, .suspect-form-data {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  div.input-field {
+    display: flex;
+    flex-direction: column-reverse;
+    margin: 20px;
+  }
+  .input-field input {
+    background-color: inherit;
+    border: none;
+    outline: none;
+  
+    position:relative;
+    top: -10px;
+    font-size: 1.1em;
+    /* color: white; */
+  }
+  .input-field label {
+    transition:ease 0.2s;
+    /* color: #f5f5f5; */
+  }
+  .input-field input:not(:placeholder-shown) + label, .input-field input:focus + label {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transform-origin:left bottom;
+  }
+  input:placeholder-shown + label {
+    transform: translate(0, 0) scale(1);
+    cursor: text;
+  }
+  
+  
+  /* button to upload image */
+input#lostImg, input#susImg {
+    margin: 0 15px;
+}
+
+input[type=submit], .match-suspect-img {
+    text-align: center;
+      width: 85px;
+      height: 40px;
+      font-size: 16px;
+      padding: 5px;
+      cursor: pointer;
+      position: absolute;   
+}
+input[type=submit] {
+    background-color: #d4ebff;
+    border-color: aliceblue;
+    right: 26px;
+    bottom: 18px;
+}  
+.match-suspect-img {
+    right: 90px;
+    bottom: 32px;
+    background-color: #f8add3;
+    border-color: #ffa7d6;
+}
+
+input[type=submit]:hover {
+    background-color: #b2dbff;
+}
+.match-suspect-img:hover {
+    background-color: #ff9fcf;
+}
