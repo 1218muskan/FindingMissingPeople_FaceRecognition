@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
@@ -14,10 +15,22 @@ with open('config.json', 'r') as c:
     params = json.load(c)["params"]
 
 
+
 # creating flask object
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/finding_missing_people'
 db = SQLAlchemy(app)
+
+# configuration of mail
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = ''
+app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_SUPPRESS_SEND'] = False
+app.config['TESTING'] = False
+mail = Mail(app)
 
 # setting session secret key
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -84,8 +97,10 @@ class Found(db.Model):
 #
 # 1. make a entry in found table of database
 # 2. moving actual image from missing to found image folder
-#    ( suspect image folder will remain as it is )
-# 3. deleting the entry from missing table in database
+#    ( suspect image folder will remain as it is, but its name will be changed to cID_name)
+# 3. Sending mail to admin
+# 4. deleting the entry from missing table in database
+
 
 
 
@@ -196,16 +211,55 @@ def home():
                 shutil.move(file_to_move, destination)
 
 
+                # renaming the suspect image
+                cwd = os.getcwd()
+
+                os.chdir(params["suspect_images"])
+                os.rename( filename, c_id + '_' + filename)
+                os.chdir(cwd)
+
+
                 # 3.......
+                mailMsg = Message("A suspect is located for missing person",
+                              sender="",
+                              recipients=[ params["admin_mail"] ] )
+
+                mailMsg.body = '''Hello Admin,
+                    A Suspect is being located and his/her face is matched with a missing person.
+                    Immediate action is required.
+                    
+                    Details of missing person case is:
+                    
+                    Case ID: %s
+                    Name of missing person: %s
+                    Gender: %s
+                    Guardian's Name: %s
+                    Guardian's Contact: %s
+                    Actual Address: %s
+                    Located location: %s
+                    
+                    Details of person who helped:
+                    
+                    Name: %s
+                    Contact: %s
+                    ''' % (c_id, foundPerson.name, foundPerson.gender, foundPerson.guardian_name,
+                           foundPerson.guardian_contact, foundPerson.city, location, helperName, helperContact)
+
+                mail.send(mailMsg)
+
+
+
+                # 4.......
                 personName = foundPerson.name
-                image_of_suspect = filename
+                image_of_suspect = c_id + '_' + filename
                 matched_image = foundPerson.complaintID + '_' + foundPerson.image_name
 
                 db.session.delete(foundPerson)
                 db.session.commit()
 
 
-                result_mssg = f"Match Found with {personName} ! Thankyou for helping"
+                result_mssg = f'''Match Found with {personName}. Concerned authorities had been notified via mail.
+                                  Thankyou for helping! We appreciate your vigilance.'''
 
                 return render_template('index.html', match=match, match_msg=result_mssg,
                                        image_of_suspect = image_of_suspect, matched_image = matched_image, scroll="match-result")

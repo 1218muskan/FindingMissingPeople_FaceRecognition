@@ -22,6 +22,25 @@ def detectFace(imgLoc):
 
 
 
+# if test image has more than single face then locating the matched face
+def locateFace(filename, faceIndex):
+    image = cv2.imread(params['suspect_images'] + filename)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    faceLoc = face_recognition.face_locations(image)[faceIndex]
+    cv2.rectangle(image, (faceLoc[3], faceLoc[0]), (faceLoc[1], faceLoc[2]), (0, 255, 0), 2)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+    # saving the image with rectangle in suspect folder
+    cwd = os.getcwd()
+
+    os.chdir( params["suspect_images"] )
+    cv2.imwrite(filename, image)
+
+    os.chdir(cwd)
+
+
+
 # this function called in match_faces function
 def getFaceEncodings(images):
     encodingList = []
@@ -57,13 +76,23 @@ def match_faces(suspect_img_loc, missing_img_name):
 
     missingEncodings = getFaceEncodings(dbImages)
 
+
     index = 0
     for en in missingEncodings:
+
+        faceNum = 0
+
         for sEN in suspect_encoding:
 
             result = face_recognition.compare_faces([en], sEN)
             if result[0]:
+
+                if len(suspect_encoding) > 1:
+                    locateFace(suspect_img_loc, faceNum)
+
                 return missingPeopleNames[index]
+
+            faceNum += 1
 
         index += 1
 
