@@ -176,7 +176,9 @@ def home():
                 # match will return the image name  ( complaintID_name.ext )
                 # separating compliant ID and name from match
 
-                c_id, name = match.split("_")
+                # c_id, name = match.split("_")
+                c_id = match[: match.find('_') ]
+                name = match[  match.find('_') +1 : ]
                 foundPerson = Missing.query.get(c_id)
 
                 # id helper didn't entered found date
@@ -194,8 +196,9 @@ def home():
                     db.session.add(entry)
                     db.session.commit()
 
-                except:
+                except IntegrityError as err:
                     errorMsg = "Some error occurred, Image can't be matched"
+                    print(err.orig.args[1])
 
                     os.remove(locationOfImg)
 
