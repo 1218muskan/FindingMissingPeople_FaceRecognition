@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2022 at 05:21 PM
+-- Generation Time: May 27, 2022 at 09:28 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -32,7 +32,7 @@ CREATE TABLE `found` (
   `name` text NOT NULL,
   `gender` text NOT NULL,
   `guardian_name` text NOT NULL,
-  `guardian_contact` int(10) NOT NULL,
+  `guardian_contact` varchar(10) NOT NULL,
   `address` varchar(40) NOT NULL,
   `helper_name` text NOT NULL,
   `helper_contact` int(10) NOT NULL,
@@ -48,9 +48,9 @@ CREATE TABLE `found` (
 --
 
 INSERT INTO `found` (`complaintID`, `name`, `gender`, `guardian_name`, `guardian_contact`, `address`, `helper_name`, `helper_contact`, `found_location`, `missing_date`, `found_date`, `actual_image`, `suspect_image`) VALUES
-('cb001012', 'Elon', 'M', 'Musk Family', 2147483647, 'xyz', 'xxxxx', 2147483647, 'xyzz', '2022-05-26', '2022-05-27', 'Elon_Musk.JPG', 'testIMG.JPG'),
-('cb111021', 'Muskan Gupta', 'F', 'Anu', 2147483647, 'Delhi', 'mehak', 2147483647, 'delhi', '2022-05-23', '2022-05-27', 'Muskan.jpeg', 'Muskan1.jpeg'),
-('cb111123', 'Anushka', 'F', 'Sen', 2147483647, 'mumbai', 'veena', 2147483647, 'delhi', '2022-05-23', '2022-05-30', 'anushka_sen.JPG', 'anushkaTest.JPG');
+('cb001012', 'Elon', 'M', 'Musk Family', '2361872009', 'xyz', 'xxxxx', 2147483647, 'xyzz', '2022-05-26', '2022-05-28', 'Elon_Musk.JPG', 'musk_gates.JPG'),
+('cb111021', 'Muskan Gupta', 'F', 'Anu', '8010334221', 'Delhi', 'mehak', 2147483647, 'delhi', '2022-05-23', '2022-05-28', 'Muskan.jpeg', 'Muskan1.jpeg'),
+('cb111123', 'Anushka', 'F', 'Sen', '9999123612', 'mumbai', 'kartik', 2147483647, 'Delhi', '2022-05-28', '2022-05-28', 'anushka_sen.JPG', 'anushkaTest.JPG');
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,7 @@ CREATE TABLE `missing` (
   `gender` text NOT NULL,
   `age` int(2) NOT NULL,
   `guardian_name` text NOT NULL,
-  `guardian_contact` int(10) NOT NULL,
+  `guardian_contact` varchar(10) NOT NULL,
   `city` text NOT NULL,
   `pincode` int(6) NOT NULL,
   `image_name` varchar(20) NOT NULL,
@@ -76,8 +76,8 @@ CREATE TABLE `missing` (
 --
 
 INSERT INTO `missing` (`complaintID`, `name`, `gender`, `age`, `guardian_name`, `guardian_contact`, `city`, `pincode`, `image_name`, `missing_date`) VALUES
-('cb000112', 'Ratan tata', 'M', 47, 'ABC', 2147483647, 'mumbai', 111004, 'Ratan_tata.JPG', '2022-05-27'),
-('cb002100', 'Alia', 'F', 20, 'mahesh', 2147483647, 'mumbai', 111021, 'Alia.JPG', '2022-05-27');
+('cb000112', 'Tiger', 'M', 30, 'Jackie', '8899999988', 'Delhi', 100006, 'tiger.JPG', '2022-05-28'),
+('cb002100', 'Alia', 'F', 32, 'mahesh', '7773228999', 'mumbai', 111021, 'Alia.JPG', '2022-05-28');
 
 --
 -- Indexes for dumped tables

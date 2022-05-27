@@ -224,7 +224,7 @@ def home():
 
                 # 3.......
                 mailMsg = Message("A suspect is located for missing person",
-                              sender="",
+                              sender="findmissingpeople05@gmail.com",
                               recipients=[ params["admin_mail"] ] )
 
                 mailMsg.body = '''Hello Admin,
