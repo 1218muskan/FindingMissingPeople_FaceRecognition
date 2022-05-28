@@ -223,11 +223,12 @@ def home():
 
 
                 # 3.......
-                mailMsg = Message("A suspect is located for missing person",
-                              sender="findmissingpeople05@gmail.com",
-                              recipients=[ params["admin_mail"] ] )
+                try:
+                    mailMsg = Message("A suspect is located for missing person",
+                                      sender="findmissingpeople05@gmail.com",
+                                      recipients=[ params["admin_mail"] ] )
 
-                mailMsg.body = '''Hello Admin,
+                    mailMsg.body = '''Hello Admin, 
                     A Suspect is being located and his/her face is matched with a missing person.
                     Immediate action is required.
                     
@@ -248,12 +249,21 @@ def home():
                     ''' % (c_id, foundPerson.name, foundPerson.gender, foundPerson.guardian_name,
                            foundPerson.guardian_contact, foundPerson.city, location, helperName, helperContact)
 
-                mail.send(mailMsg)
+                    mail.send(mailMsg)
 
+
+                    result_mssg = f'''Match Found with {foundPerson.name}. Concerned authorities had been notified via mail.
+                                      Thankyou for helping! We appreciate your vigilance.'''
+
+
+                except Exception as e:
+
+                    print(e)
+                    result_mssg = f'''Match Found with {foundPerson.name}. Some error occurred, fail to send mail. 
+                                      Please contact police immediately. Thanks for your help!'''
 
 
                 # 4.......
-                personName = foundPerson.name
                 image_of_suspect = c_id + '_' + filename
                 matched_image = foundPerson.complaintID + '_' + foundPerson.image_name
 
@@ -261,8 +271,7 @@ def home():
                 db.session.commit()
 
 
-                result_mssg = f'''Match Found with {personName}. Concerned authorities had been notified via mail.
-                                  Thankyou for helping! We appreciate your vigilance.'''
+
 
                 return render_template('index.html', match=match, match_msg=result_mssg,
                                        image_of_suspect = image_of_suspect, matched_image = matched_image, scroll="match-result")
