@@ -22,15 +22,15 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/finding_missing
 db = SQLAlchemy(app)
 
 # configuration of mail
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = ''
-app.config['MAIL_PASSWORD'] = ''
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_SUPPRESS_SEND'] = False
-app.config['TESTING'] = False
-mail = Mail(app)
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = ''
+# app.config['MAIL_PASSWORD'] = ''
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
+# app.config['MAIL_SUPPRESS_SEND'] = False
+# app.config['TESTING'] = False
+# mail = Mail(app)
 
 # setting session secret key
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -223,44 +223,46 @@ def home():
 
 
                 # 3.......
-                try:
-                    mailMsg = Message("A suspect is located for missing person",
-                                      sender="findmissingpeople05@gmail.com",
-                                      recipients=[ params["admin_mail"] ] )
+                # try:
+                #     mailMsg = Message("A suspect is located for missing person",
+                #                       sender="findmissingpeople05@gmail.com",
+                #                       recipients=[ params["admin_mail"] ] )
 
-                    mailMsg.body = '''Hello Admin, 
-                    A Suspect is being located and his/her face is matched with a missing person.
-                    Immediate action is required.
+                #     mailMsg.body = '''Hello Admin, 
+                #     A Suspect is being located and his/her face is matched with a missing person.
+                #     Immediate action is required.
                     
-                    Details of missing person case is:
+                #     Details of missing person case is:
                     
-                    Case ID: %s
-                    Name of missing person: %s
-                    Gender: %s
-                    Guardian's Name: %s
-                    Guardian's Contact: %s
-                    Actual Address: %s
-                    Located location: %s
+                #     Case ID: %s
+                #     Name of missing person: %s
+                #     Gender: %s
+                #     Guardian's Name: %s
+                #     Guardian's Contact: %s
+                #     Actual Address: %s
+                #     Located location: %s
                     
-                    Details of person who helped:
+                #     Details of person who helped:
                     
-                    Name: %s
-                    Contact: %s
-                    ''' % (c_id, foundPerson.name, foundPerson.gender, foundPerson.guardian_name,
-                           foundPerson.guardian_contact, foundPerson.city, location, helperName, helperContact)
+                #     Name: %s
+                #     Contact: %s
+                #     ''' % (c_id, foundPerson.name, foundPerson.gender, foundPerson.guardian_name,
+                #            foundPerson.guardian_contact, foundPerson.city, location, helperName, helperContact)
 
-                    mail.send(mailMsg)
-
-
-                    result_mssg = f'''Match Found with {foundPerson.name}. Concerned authorities had been notified via mail.
-                                      Thankyou for helping! We appreciate your vigilance.'''
+                #     mail.send(mailMsg)
 
 
-                except Exception as e:
+                #     result_mssg = f'''Match Found with {foundPerson.name}. Concerned authorities had been notified via mail.
+                #                       Thankyou for helping! We appreciate your vigilance.'''
 
-                    print(e)
-                    result_mssg = f'''Match Found with {foundPerson.name}. Some error occurred, fail to send mail. 
-                                      Please contact police immediately. Thanks for your help!'''
+
+                # except Exception as e:
+
+                #     print(e)
+                #     result_mssg = f'''Match Found with {foundPerson.name}. Some error occurred, fail to send mail. 
+                #                       Please contact police immediately. Thanks for your help!'''
+
+                result_mssg = f'''Match Found with {foundPerson.name}. Please contact police immediately. Thanks for your help!'''
 
 
                 # 4.......
